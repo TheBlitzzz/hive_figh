@@ -1,10 +1,7 @@
 part of pages;
 
 class MainPage extends StatefulWidget {
-  final String title;
-  final Widget mainContent;
-
-  const MainPage(this.title, this.mainContent, {Key? key}) : super(key: key);
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -29,16 +26,21 @@ class _MainPageState extends State<MainPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          debugPrint("Am an advisor");
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("You have activated the advisor"),
-            action: SnackBarAction(
-              label: 'Dismiss',
-              onPressed: () {
-                debugPrint("Dismissed");
-              },
-            ),
-          ));
+          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          //   content: Text("You have activated the advisor"),
+          //   action: SnackBarAction(
+          //     label: 'Dismiss',
+          //     onPressed: () {
+          //       debugPrint("Dismissed");
+          //     },
+          //   ),
+          // ));
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const ChatDialog();
+            },
+          );
         },
         child: Icon(Icons.chat),
       ),
