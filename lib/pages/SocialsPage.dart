@@ -1,13 +1,13 @@
 part of pages;
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class SocialsPage extends StatefulWidget {
+  const SocialsPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SocialsPage> createState() => _SocialsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SocialsPageState extends State<SocialsPage> {
   @override
   Widget build(BuildContext context) {
     return Center(

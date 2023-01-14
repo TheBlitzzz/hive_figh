@@ -76,9 +76,6 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() {
     debugPrint("Login");
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const MainPage(HomePage())),
-    );
+    Navigator.pushReplacementNamed(context, "/");
   }
 }
