@@ -15,7 +15,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(_title),
@@ -38,7 +37,14 @@ class _MainPageState extends State<MainPage> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return const ChatDialog();
+              return ChatDialog(AdvisorMessageModel(
+                1,
+                "Hi Mr. Jia Wei, what would you like to do today?",
+                [
+                  ChatBot.MSG_LearnWithRHB,
+                  ChatBot.MSG_GeneralFAQ,
+                ],
+              ));
             },
           );
         },

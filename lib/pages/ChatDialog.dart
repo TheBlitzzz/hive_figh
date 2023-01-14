@@ -7,7 +7,9 @@ const profiles = [
 final List<ChatMessageModel> chatMessages = [];
 
 class ChatDialog extends StatefulWidget {
-  const ChatDialog({Key? key}) : super(key: key);
+  final AdvisorMessageModel initialDialog;
+
+  const ChatDialog(this.initialDialog, {Key? key}) : super(key: key);
 
   @override
   State<ChatDialog> createState() => _ChatDialogState();
@@ -20,7 +22,7 @@ class _ChatDialogState extends State<ChatDialog> {
   void initState() {
     super.initState();
     chatMessages.clear();
-    chatMessages.add(_buildInitialDialog());
+    chatMessages.add(widget.initialDialog);
     _chatInputController = TextEditingController();
   }
 
@@ -86,20 +88,28 @@ class _ChatDialogState extends State<ChatDialog> {
             child: TextField(
               decoration: InputDecoration(
                 suffix: TextButton(
-                  onPressed: () {
-                    setState(() {
-                      final message = _chatInputController.text.trim();
-                      chatMessages.add(ChatMessageModel(0, message));
-                      if (message.toLowerCase() == "clear") {
-                        chatMessages.clear();
-                        chatMessages.add(_buildInitialDialog());
-                      } else {
-                        var reply = ChatBot.ReceiveMessage(message);
-                        chatMessages.add(reply);
-                      }
+                  onPressed: () async {
+                    final message = _chatInputController.text.trim();
+                    chatMessages.add(ChatMessageModel(0, message));
 
-                      _chatInputController.text = "";
-                    });
+                    if (message.toLowerCase() == "clear") {
+                      setState(() {
+                        chatMessages.clear();
+                        chatMessages.add(widget.initialDialog);
+                      });
+                    } else {
+                      var reply = ChatBot.ReceiveMessage(message);
+                      if (reply.message == "EXIT") {
+                        Navigator.of(context).pop();
+                      } else {
+                        await Future.delayed(const Duration(seconds: 1));
+                        setState(() {
+                          chatMessages.add(reply);
+                        });
+                      }
+                    }
+
+                    _chatInputController.text = "";
                   },
                   child: const Text("Send"),
                 ),
@@ -124,23 +134,18 @@ class _ChatDialogState extends State<ChatDialog> {
     );
   }
 
-  AdvisorMessageModel _buildInitialDialog() {
-    return AdvisorMessageModel(
-      1,
-      "Hi Mr. Jia Wei, what would you like to do today?",
-      [
-        ChatBot.MSG_LearnWithRHB,
-        ChatBot.MSG_RHBInsurance,
-        ChatBot.MSG_LearnWithRHB,
-      ],
-    );
-  }
-
-  void chooseProvidedDialog(String providedDialog) {
+  void chooseProvidedDialog(String providedDialog) async {
     setState(() {
       chatMessages.add(ChatMessageModel(0, providedDialog));
-      var reply = ChatBot.ReceiveMessage(providedDialog);
-      chatMessages.add(reply);
     });
+    var reply = ChatBot.ReceiveMessage(providedDialog);
+    if (reply.message == "EXIT") {
+      Navigator.of(context).pop();
+    } else {
+      await Future.delayed(const Duration(seconds: 1));
+      setState(() {
+        chatMessages.add(reply);
+      });
+    }
   }
 }

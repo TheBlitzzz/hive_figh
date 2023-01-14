@@ -12,9 +12,7 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        children: [
-          // const Text("Accounts"),
-        ],
+        children: [],
       ),
     );
   }
