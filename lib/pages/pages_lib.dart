@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hive_figh/ChatBot.dart';
+import 'package:hive_figh/models/models_lib.dart';
 
 part 'LoginPage.dart';
 part 'HomePage.dart';
