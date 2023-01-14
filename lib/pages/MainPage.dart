@@ -53,17 +53,18 @@ class _MainPageState extends State<MainPage> {
                   _mainContent = const HomePage();
                   _title = "Home";
                   break;
+
                 case 1:
-                  _mainContent = const AccountPage();
-                  _title = "Account";
-                  break;
-                case 2:
                   _mainContent = const SocialsPage();
                   _title = "Socials";
                   break;
-                case 3:
+                case 2:
                   _mainContent = const GamesPage();
                   _title = "Games";
+                  break;
+                case 3:
+                  _mainContent = const AccountPage();
+                  _title = "Account";
                   break;
               }
               currentIndex = index;
@@ -78,10 +79,7 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "Account",
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.people_alt_sharp),
             label: "Socials",
@@ -89,6 +87,10 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.videogame_asset),
             label: "Game",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: "Account",
           ),
         ],
       ),
