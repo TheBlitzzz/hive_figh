@@ -5,3 +5,4 @@ import 'package:flutter/rendering.dart';
 
 part 'LoginPage.dart';
 part 'HomePage.dart';
+part 'MainPage.dart';
