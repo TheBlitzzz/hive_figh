@@ -8,14 +8,82 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController _textFieldController = TextEditingController();
+  // String codeDialog = '';
+  String valueText = '';
+  double totalBudget = 200;
+  double spendings = 0;
+  double money = 394.19;
+
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Transfer Amount:'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "Amount "),
+            ),
+            actions: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.withOpacity(0.4),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+                  child: Text('Cancel'),
+                  onPressed: () {
+                    setState(() {
+                      Navigator.pop(context);
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.withOpacity(0.4),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+                  child: Text('Confirm'),
+                  onPressed: () {
+                    setState(() {
+                      // codeDialog = valueText;
+                      spendings += double.parse(valueText);
+                      updateMoneySpent(double.parse(valueText));
+                      Navigator.pop(context);
+                    });
+                  },
+                ),
+              ],)
+
+
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
           Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.1),
+
+                  border: Border.all(
+                    color: Colors.cyan.withOpacity(0),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(6))
+              ),
             margin: const EdgeInsets.all(10.0),
-            color: Colors.amber.withOpacity(0.01),
+            
             width: 1000.0,
             height: 500.0,
             alignment: Alignment.topCenter,
@@ -24,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 45.0),
                   Container(
                       decoration: BoxDecoration(
-                          color: Colors.cyan.withOpacity(0.5),
+                          color: Colors.cyan.withOpacity(0.4),
 
                           border: Border.all(
                             color: Colors.cyan.withOpacity(0),
@@ -38,14 +106,15 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Image(image: AssetImage('assets/images/graph.png'),
-                          height: 120,
-                          width: 120,),
-                        Text("Remaining Balance: MYR 294.19"),
+                          height: 100,
+                          width: 100,),
+                        Text("Remaining Balance: MYR"+ money.toString()),
+                        Text("Budget Remaining: MYR" + (totalBudget).toString()),
                         SizedBox(height:5)
                       ],
                     )
                   ),
-                  SizedBox(height:35),
+                  SizedBox(height:5),
                   Text("Transactions"),
                   Container(
                       decoration: BoxDecoration(
@@ -164,6 +233,17 @@ class _HomePageState extends State<HomePage> {
                             ],
                       ))
                   ),
+                  SizedBox(height:10),
+                  ElevatedButton(
+                    child: Text('Transfer', style: TextStyle(fontSize: 10.0),),
+                    onPressed: () {
+                      _displayTextInputDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.cyan.withOpacity(0.4),
+                        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20)),
+                  ),
+
                 ]
             )
 
@@ -172,5 +252,13 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void updateMoneySpent(double spent){
+      money -= spent;
+      totalBudget -= spent;
+      if(totalBudget <= 0){
+        //ai.prompt();
+      }
   }
 }
