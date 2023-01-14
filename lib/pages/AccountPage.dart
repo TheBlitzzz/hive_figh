@@ -13,7 +13,7 @@ class _AccountPageState extends State<AccountPage> {
     return Center(
       child: Column(
         children: [
-          const Text("Accounts"),
+          // const Text("Accounts"),
         ],
       ),
     );

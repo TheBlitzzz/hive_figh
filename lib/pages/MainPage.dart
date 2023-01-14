@@ -18,8 +18,11 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text(_title),
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: _mainContent,

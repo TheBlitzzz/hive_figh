@@ -13,7 +13,7 @@ class _GamesPageState extends State<GamesPage> {
     return Center(
       child: Column(
         children: [
-          const Text("HomePage"),
+          // const Text("HomePage"),
         ],
       ),
     );

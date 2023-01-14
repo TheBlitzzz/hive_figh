@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hive Figh RHB',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.cyan,
       ),
       initialRoute: "login",
       routes: {
