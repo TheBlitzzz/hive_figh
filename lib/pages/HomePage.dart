@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                     height: 150.0,
                     child: Column(
                       children: [
-                        Text("Hello")
+                        Text("Remaining Balance: MYR 294.19")
                       ],
                     )
                   ),
