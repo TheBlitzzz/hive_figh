@@ -21,6 +21,7 @@ class _ChatDialogState extends State<ChatDialog> {
   @override
   void initState() {
     super.initState();
+    ChatBot.ResetState();
     chatMessages.clear();
     chatMessages.add(widget.initialDialog);
     _chatInputController = TextEditingController();

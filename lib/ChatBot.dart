@@ -20,6 +20,12 @@ class ChatBot {
   static bool inQuizQ2 = false;
   static bool inQuizQ3 = false;
 
+  static void ResetState() {
+    inQuizQ1 = false;
+    inQuizQ2 = false;
+    inQuizQ3 = false;
+  }
+
   static ChatMessageModel ReceiveMessage(String message) {
     if (message == MSG_LearnWithRHB) {
       return AdvisorMessageModel(
